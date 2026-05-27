@@ -83,7 +83,7 @@ export function TasbeehPage() {
       </div>
 
       {/* Current Zikr Display */}
-      <div className="glass-gold p-5 mb-6 text-center rounded-2xl glass-shimmer">
+      <div className="glass-gold p-5 mb-4 text-center rounded-2xl glass-shimmer">
         <p
           className="text-2xl font-bold text-gradient-animate mb-1"
           style={{ fontFamily: "'Amiri', serif" }}
@@ -93,9 +93,9 @@ export function TasbeehPage() {
       </div>
 
       {/* Count Display with progress ring */}
-      <div className="relative flex items-center justify-center mb-6">
-        {/* SVG Progress Ring around counter */}
-        <svg className="absolute w-56 h-56 -rotate-90" viewBox="0 0 200 200">
+      <div className="relative w-56 h-56 mx-auto mb-2">
+        {/* SVG Progress Ring */}
+        <svg className="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 200 200">
           <circle
             cx="100"
             cy="100"
@@ -125,9 +125,9 @@ export function TasbeehPage() {
           </defs>
         </svg>
 
-        {/* Count number */}
+        {/* Count number - perfectly centered */}
         <motion.div
-          className="text-center relative z-10"
+          className="absolute inset-0 flex flex-col items-center justify-center z-10"
           key={tasbeehCount}
           initial={{ scale: 0.85 }}
           animate={{ scale: 1 }}
@@ -146,7 +146,7 @@ export function TasbeehPage() {
       </div>
 
       {/* Big Tap Button - Massive Glowing Sphere */}
-      <div className="flex flex-col items-center gap-5">
+      <div className="flex flex-col items-center gap-4">
         <div className="relative">
           {/* Animated pulsing glow ring */}
           <span className="absolute inset-[-12px] rounded-full border-2 border-[#2D8B66]/20 animate-pulse-ring" />
