@@ -41,18 +41,27 @@ export function IslamicHeader() {
       className="neo-glass relative overflow-hidden rounded-3xl p-6"
     >
       {/* Inner content wrapper */}
-      <div className="relative z-10 rounded-[calc(1.5rem-2px)] overflow-hidden bg-gradient-to-br from-[#0D3B2E]/[0.93] via-[#1A5C42]/[0.90] to-[#0D3B2E]/[0.93] dark:from-[#060b14]/[0.95] dark:via-[#0D3B2E]/[0.88] dark:to-[#060b14]/[0.95]">
+      <div className="relative z-10 rounded-[calc(1.5rem-2px)] overflow-hidden">
+        {/* Background image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: "url('/header-bg.webp')" }}
+        />
+
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0D3B2E]/[0.85] via-[#1A5C42]/[0.75] to-[#0D3B2E]/[0.88] dark:from-[#040a06]/[0.92] dark:via-[#0D3B2E]/[0.80] dark:to-[#040a06]/[0.92]" />
+
         {/* Bismillah watermark */}
         <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white/[0.03] text-[120px] leading-none select-none pointer-events-none"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white/[0.04] text-[120px] leading-none select-none pointer-events-none"
           style={{ fontFamily: "'Amiri', serif" }}
         >
           بسم الله
         </div>
 
-        {/* Islamic geometric pattern overlay */}
+        {/* Subtle Islamic geometric pattern overlay */}
         <div
-          className="absolute inset-0 opacity-[0.04]"
+          className="absolute inset-0 opacity-[0.03]"
           style={{
             backgroundImage: `
               repeating-linear-gradient(
