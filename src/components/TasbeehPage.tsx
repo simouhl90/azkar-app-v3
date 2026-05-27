@@ -6,6 +6,7 @@ import { RotateCcw } from 'lucide-react';
 import { useStore } from '@/store/useStore';
 import { tasbeehTypes } from '@/lib/azkar-data';
 import { showToast } from './Toast';
+import { playTapSound, playCompletionSound, playTargetReachedSound } from '@/lib/sounds';
 import { CelebrationIcon } from './Icons';
 
 export function TasbeehPage() {
@@ -34,12 +35,19 @@ export function TasbeehPage() {
       navigator.vibrate(20);
     }
 
+    if (settings.soundEnabled) {
+      playTapSound();
+    }
+
     if (tasbeehCount + 1 >= tasbeehTarget) {
       setShowCelebration(true);
       showToast('أتممت الهدف بحمد الله!');
+      if (settings.soundEnabled) {
+        playTargetReachedSound();
+      }
       setTimeout(() => setShowCelebration(false), 3000);
     }
-  }, [tapTasbeeh, tasbeehCount, tasbeehTarget, settings.hapticFeedback]);
+  }, [tapTasbeeh, tasbeehCount, tasbeehTarget, settings.hapticFeedback, settings.soundEnabled]);
 
   const handleTargetChange = (t: number) => {
     setTasbeehTarget(t);

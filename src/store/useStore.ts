@@ -181,6 +181,7 @@ export const useStore = create<AppState>()(
       partialize: (state) => ({
         zikrProgress: state.zikrProgress,
         favorites: state.favorites,
+        tasbeehCount: state.tasbeehCount,
         tasbeehTarget: state.tasbeehTarget,
         tasbeehType: state.tasbeehType,
         stats: state.stats,

@@ -64,7 +64,7 @@ export function QuickAccess() {
                   className="text-[13px] text-[#2C2C2C] dark:text-gray-300 leading-[1.8] line-clamp-3"
                   style={{ fontFamily: "'Amiri', serif" }}
                 >
-                  {zikr.text.length > 80 ? zikr.text.substring(0, 80) + '...' : zikr.text}
+                  {zikr.text}
                 </p>
                 <p className="mt-2.5 text-[10px] text-[#C5A356] font-medium" style={{ fontFamily: "'Noto Kufi Arabic', sans-serif" }}>
                   {qa.label}

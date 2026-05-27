@@ -6,6 +6,7 @@ import { ArrowRight, Heart, RotateCcw, CheckCircle2 } from 'lucide-react';
 import { useStore } from '@/store/useStore';
 import { azkarData } from '@/lib/azkar-data';
 import { showToast } from './Toast';
+import { playTapSound, playCompletionSound } from '@/lib/sounds';
 import { SunriseIcon, MoonIcon, MoonSleepIcon, PrayerHandsIcon, SparklesIcon, OpenBookIcon, WaterDropIcon, FoodIcon, LightbulbIcon, CheckIcon, CelebrationIcon } from './Icons';
 
 const iconMap: Record<string, React.ComponentType<{className?: string; size?: number}>> = {
@@ -53,10 +54,17 @@ export function AzkarPage() {
         navigator.vibrate(30);
       }
 
+      if (settings.soundEnabled) {
+        playTapSound();
+      }
+
       const p = zikrProgress[catId];
       const currentProgress = p?.[index];
       if (currentProgress && currentProgress.remaining <= 1) {
         showToast('تمّ بحمد الله');
+        if (settings.soundEnabled) {
+          playCompletionSound();
+        }
       }
 
       if (allCompleted()) {
@@ -327,7 +335,7 @@ export function AzkarPage() {
                 </div>
 
                 {/* Progress wave at bottom */}
-                {pct => {
+                {(() => {
                   const currentPct = completed ? 100 : Math.round(((zikr.count - remaining) / zikr.count) * 100);
                   if (currentPct === 0) return null;
                   return (
@@ -340,7 +348,7 @@ export function AzkarPage() {
                       />
                     </div>
                   );
-                }}
+                })()}
               </motion.div>
             );
           })}
