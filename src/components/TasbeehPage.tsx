@@ -6,6 +6,7 @@ import { RotateCcw } from 'lucide-react';
 import { useStore } from '@/store/useStore';
 import { tasbeehTypes } from '@/lib/azkar-data';
 import { showToast } from './Toast';
+import { CelebrationIcon } from './Icons';
 
 export function TasbeehPage() {
   const {
@@ -35,7 +36,7 @@ export function TasbeehPage() {
 
     if (tasbeehCount + 1 >= tasbeehTarget) {
       setShowCelebration(true);
-      showToast('🎉 أتممت الهدف بحمد الله!');
+      showToast('أتممت الهدف بحمد الله!');
       setTimeout(() => setShowCelebration(false), 3000);
     }
   }, [tapTasbeeh, tasbeehCount, tasbeehTarget, settings.hapticFeedback]);
@@ -55,7 +56,7 @@ export function TasbeehPage() {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
+      transition={{ duration: 0.15 }}
       className="pb-4"
     >
       {/* Type Selector */}
@@ -113,7 +114,7 @@ export function TasbeehPage() {
             strokeLinecap="round"
             strokeDasharray={2 * Math.PI * 90}
             strokeDashoffset={2 * Math.PI * 90 - (progressPct / 100) * 2 * Math.PI * 90}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.15 }}
           />
           <defs>
             <linearGradient id="tasbeehProgressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -251,7 +252,7 @@ export function TasbeehPage() {
               className="neo-glass rounded-3xl p-8 text-center shadow-2xl mx-8 max-w-sm"
             >
               <div className="p-1 rounded-[calc(1.5rem-2px)] bg-gradient-to-br from-[#0D3B2E] to-[#1A5C42]">
-                <div className="text-6xl mb-4">🎊</div>
+                <div className="mb-4"><CelebrationIcon className="w-14 h-14 text-[#C5A356] mx-auto" /></div>
                 <p
                   className="text-2xl font-bold text-gradient-gold mb-2"
                   style={{ fontFamily: "'Amiri', serif" }}

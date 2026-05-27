@@ -5,6 +5,11 @@ import { Heart, Trash2 } from 'lucide-react';
 import { useStore } from '@/store/useStore';
 import { azkarData } from '@/lib/azkar-data';
 import { showToast } from './Toast';
+import { SunriseIcon, MoonIcon, MoonSleepIcon, PrayerHandsIcon, SparklesIcon, OpenBookIcon, WaterDropIcon, FoodIcon } from './Icons';
+
+const iconMap: Record<string, React.ComponentType<{className?: string; size?: number}>> = {
+  SunriseIcon, MoonIcon, MoonSleepIcon, PrayerHandsIcon, SparklesIcon, OpenBookIcon, WaterDropIcon, FoodIcon,
+};
 
 export function FavoritesPage() {
   const { favorites, toggleFavorite } = useStore();
@@ -37,7 +42,7 @@ export function FavoritesPage() {
           لا توجد أذكار مفضلة
         </p>
         <p className="text-sm text-[#6B6B6B] dark:text-gray-400 text-center max-w-[250px]" style={{ fontFamily: "'Noto Kufi Arabic', sans-serif" }}>
-          اضغط على أيقونة القلب ❤️ بجانب أي ذكر لإضافته هنا
+          اضغط على أيقونة القلب بجانب أي ذكر لإضافته هنا
         </p>
       </motion.div>
     );
@@ -47,7 +52,7 @@ export function FavoritesPage() {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
+      transition={{ duration: 0.15 }}
     >
       <h2
         className="text-lg font-bold text-[#0D3B2E] dark:text-[#E8D5A3] mb-4"
@@ -70,7 +75,7 @@ export function FavoritesPage() {
                 initial={{ opacity: 0, y: 16, scale: 0.97 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, x: -100, scale: 0.95 }}
-                transition={{ delay: idx * 0.04, duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+                transition={{ delay: idx * 0.02, duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
                 layout
               >
                 <div
@@ -79,7 +84,7 @@ export function FavoritesPage() {
                 >
                   <div className="flex items-start gap-3">
                     <div className="w-11 h-11 shrink-0 rounded-xl bg-gradient-to-br from-white/60 to-white/20 dark:from-white/10 dark:to-white/5 flex items-center justify-center border border-white/40 dark:border-white/10">
-                      <span className="text-lg">{cat.icon}</span>
+                      {(() => { const IconComponent = iconMap[cat.icon]; return IconComponent ? <IconComponent className="w-5 h-5" /> : <span className="text-lg">{cat.icon}</span>; })()}
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-2">

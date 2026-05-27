@@ -2,6 +2,7 @@
 
 import { useMemo } from 'react';
 import { motion } from 'framer-motion';
+import { CrescentIcon, CalendarIcon } from './Icons';
 
 function getHijriDate() {
   try {
@@ -36,7 +37,7 @@ export function IslamicHeader() {
     <motion.div
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
+      transition={{ duration: 0.2, ease: 'easeOut' }}
       className="neo-glass relative overflow-hidden rounded-3xl p-6"
     >
       {/* Inner content wrapper */}
@@ -105,7 +106,7 @@ export function IslamicHeader() {
               transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
               className="w-14 h-14 rounded-2xl bg-[#C5A356]/15 backdrop-blur-sm flex items-center justify-center text-3xl border border-[#C5A356]/25"
             >
-              ☪
+              <CrescentIcon className="w-7 h-7 text-[#E8D5A3]" />
             </motion.div>
             <div>
               <h1
@@ -127,7 +128,7 @@ export function IslamicHeader() {
           <div className="flex flex-col gap-1.5">
             <div className="inline-flex self-start">
               <div className="glass-pill text-xs text-[#E8D5A3]/80 border-[#C5A356]/15">
-                📅 {hijriDate}
+                <CalendarIcon className="w-3 h-3 text-[#E8D5A3]/80 inline ml-1" /> {hijriDate}
               </div>
             </div>
             <p className="text-[11px] text-white/35" style={{ fontFamily: "'Noto Kufi Arabic', sans-serif" }}>

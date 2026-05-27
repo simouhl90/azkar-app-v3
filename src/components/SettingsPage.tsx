@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import { useStore } from '@/store/useStore';
 import { showToast } from './Toast';
+import { CrescentIcon } from './Icons';
 import {
   requestPermission,
   scheduleMorningReminder,
@@ -181,7 +182,7 @@ export function SettingsPage() {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
+      transition={{ duration: 0.15 }}
       className="space-y-4"
     >
       <h2
@@ -581,7 +582,7 @@ export function SettingsPage() {
       {/* About Section */}
       <GlassCard>
         <div className="text-center">
-          <div className="w-14 h-14 mx-auto mb-2 rounded-2xl glass-header flex items-center justify-center text-2xl">☪</div>
+          <div className="w-14 h-14 mx-auto mb-2 rounded-2xl glass-header flex items-center justify-center"><CrescentIcon className="w-7 h-7 text-[#E8D5A3]" /></div>
           <p
             className="text-base font-bold text-[#0D3B2E] dark:text-[#E8D5A3]"
             style={{ fontFamily: "'Amiri', serif" }}

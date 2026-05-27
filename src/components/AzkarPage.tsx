@@ -6,6 +6,11 @@ import { ArrowRight, Heart, RotateCcw, CheckCircle2 } from 'lucide-react';
 import { useStore } from '@/store/useStore';
 import { azkarData } from '@/lib/azkar-data';
 import { showToast } from './Toast';
+import { SunriseIcon, MoonIcon, MoonSleepIcon, PrayerHandsIcon, SparklesIcon, OpenBookIcon, WaterDropIcon, FoodIcon, LightbulbIcon, CheckIcon, CelebrationIcon } from './Icons';
+
+const iconMap: Record<string, React.ComponentType<{className?: string; size?: number}>> = {
+  SunriseIcon, MoonIcon, MoonSleepIcon, PrayerHandsIcon, SparklesIcon, OpenBookIcon, WaterDropIcon, FoodIcon,
+};
 
 export function AzkarPage() {
   const {
@@ -51,12 +56,12 @@ export function AzkarPage() {
       const p = zikrProgress[catId];
       const currentProgress = p?.[index];
       if (currentProgress && currentProgress.remaining <= 1) {
-        showToast('✅ تمّ بحمد الله');
+        showToast('تمّ بحمد الله');
       }
 
       if (allCompleted()) {
         setTimeout(() => {
-          showToast('🎉 ما شاء الله! أتممت جميع الأذكار');
+          showToast('ما شاء الله! أتممت جميع الأذكار');
         }, 500);
       }
 
@@ -107,7 +112,7 @@ export function AzkarPage() {
       initial={{ opacity: 0, x: -50 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: 50 }}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: 0.15 }}
       className="fixed inset-0 z-50 bg-mesh-light dark:bg-mesh-dark flex flex-col overflow-hidden"
     >
       {/* Sticky Header with animated gradient border */}
@@ -121,7 +126,7 @@ export function AzkarPage() {
               backgroundSize: '200% 100%',
             }}
             animate={{ backgroundPosition: ['0% 0%', '200% 0%'] }}
-            transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
+            transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
           />
 
           <div className="flex items-center justify-between">
@@ -156,7 +161,7 @@ export function AzkarPage() {
                   strokeLinecap="round"
                   strokeDasharray={circumference}
                   strokeDashoffset={strokeDashoffset}
-                  transition={{ duration: 0.5 }}
+                  transition={{ duration: 0.2 }}
                 />
                 <defs>
                   <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -180,7 +185,7 @@ export function AzkarPage() {
           </div>
 
           <div className="text-center mt-2">
-            <span className="text-xl">{category.icon}</span>
+            {(() => { const IconComponent = iconMap[category.icon]; return IconComponent ? <IconComponent className="w-5 h-5" /> : <span className="text-xl">{category.icon}</span>; })()}
             <h2
               className="text-lg font-bold text-gradient-animate"
               style={{ fontFamily: "'Amiri', serif" }}
@@ -208,7 +213,7 @@ export function AzkarPage() {
                 }}
                 initial={{ opacity: 0, y: 24, scale: 0.97 }}
                 animate={{ opacity: completed ? 0.65 : 1, y: 0, scale: 1 }}
-                transition={{ delay: idx * 0.03, duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+                transition={{ delay: idx * 0.015, duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
                 className="neo-glass"
               >
                 <div className="p-5 rounded-[calc(1.5rem-2px)]">
@@ -268,7 +273,7 @@ export function AzkarPage() {
                     {zikr.benefit && settings.showTranslation && (
                       <div className="glass-btn rounded-xl p-3 mb-3">
                         <p className="text-xs text-[#1A5C42] dark:text-[#E8D5A3] leading-relaxed" style={{ fontFamily: "'Noto Kufi Arabic', sans-serif" }}>
-                          💡 {zikr.benefit}
+                          <LightbulbIcon className="w-3.5 h-3.5 inline text-[#C5A356]" /> {zikr.benefit}
                         </p>
                       </div>
                     )}
@@ -314,7 +319,7 @@ export function AzkarPage() {
                     {completed && (
                       <div className="text-center mt-2">
                         <span className="text-sm text-[#1A5C42] dark:text-[#2D8B66] font-bold" style={{ fontFamily: "'Amiri', serif" }}>
-                          تمّ ✅
+                          <CheckIcon className="w-4 h-4 inline" /> تمّ
                         </span>
                       </div>
                     )}
@@ -331,7 +336,7 @@ export function AzkarPage() {
                         className="h-full bg-gradient-to-r from-[#1A5C42] via-[#C5A356] to-[#2D8B66] progress-wave"
                         initial={{ width: 0 }}
                         animate={{ width: `${currentPct}%` }}
-                        transition={{ duration: 0.4 }}
+                        transition={{ duration: 0.15 }}
                       />
                     </div>
                   );
@@ -354,7 +359,7 @@ export function AzkarPage() {
             className="shrink-0 bg-gradient-to-l from-[#C5A356] to-[#E8D5A3] p-4 text-center rounded-t-3xl shadow-xl"
           >
             <p className="text-[#0D3B2E] font-bold text-lg" style={{ fontFamily: "'Amiri', serif" }}>
-              🎉 ما شاء الله! بارك الله فيك
+              <CelebrationIcon className="w-5 h-5 inline" /> ما شاء الله! بارك الله فيك
             </p>
             <p className="text-[#0D3B2E]/70 text-sm mt-1" style={{ fontFamily: "'Noto Kufi Arabic', sans-serif" }}>
               أتممت جميع أذكار {category.title}

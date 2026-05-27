@@ -21,7 +21,7 @@ export const azkarData: AzkarCategory[] = [
   {
     id: "morning",
     title: "أذكار الصباح",
-    icon: "🌅",
+    icon: "SunriseIcon",
     color: "#D4A03C",
     gradient: "from-amber-400 via-orange-300 to-yellow-400",
     azkar: [
@@ -202,7 +202,7 @@ export const azkarData: AzkarCategory[] = [
   {
     id: "evening",
     title: "أذكار المساء",
-    icon: "🌙",
+    icon: "MoonIcon",
     color: "#7C6FD4",
     gradient: "from-indigo-500 via-purple-400 to-violet-400",
     azkar: [
@@ -383,7 +383,7 @@ export const azkarData: AzkarCategory[] = [
   {
     id: "sleep",
     title: "أذكار النوم",
-    icon: "😴",
+    icon: "MoonSleepIcon",
     color: "#8B6FD4",
     gradient: "from-violet-500 via-purple-400 to-indigo-400",
     azkar: [
@@ -486,7 +486,7 @@ export const azkarData: AzkarCategory[] = [
   {
     id: "prayer",
     title: "أذكار بعد الصلاة",
-    icon: "🤲",
+    icon: "PrayerHandsIcon",
     color: "#10B981",
     gradient: "from-emerald-400 via-green-300 to-teal-400",
     azkar: [
@@ -557,7 +557,7 @@ export const azkarData: AzkarCategory[] = [
   {
     id: "morningEvening",
     title: "أذكار متنوعة",
-    icon: "✨",
+    icon: "SparklesIcon",
     color: "#F59E0B",
     gradient: "from-yellow-400 via-amber-300 to-orange-400",
     azkar: [
@@ -630,7 +630,7 @@ export const azkarData: AzkarCategory[] = [
   {
     id: "quran",
     title: "أدعية قرآنية",
-    icon: "📖",
+    icon: "OpenBookIcon",
     color: "#EC4899",
     gradient: "from-pink-400 via-rose-300 to-red-400",
     azkar: [
@@ -703,7 +703,7 @@ export const azkarData: AzkarCategory[] = [
   {
     id: "wudu",
     title: "أذكار الوضوء",
-    icon: "💧",
+    icon: "WaterDropIcon",
     color: "#06B6D4",
     gradient: "from-cyan-400 via-sky-300 to-blue-400",
     azkar: [
@@ -746,7 +746,7 @@ export const azkarData: AzkarCategory[] = [
   {
     id: "eating",
     title: "أذكار الطعام",
-    icon: "🍽️",
+    icon: "FoodIcon",
     color: "#F97316",
     gradient: "from-orange-400 via-amber-300 to-yellow-400",
     azkar: [

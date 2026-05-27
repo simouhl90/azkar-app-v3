@@ -4,6 +4,11 @@ import { motion } from 'framer-motion';
 import { useStore } from '@/store/useStore';
 import { azkarData, quickAccessAzkar } from '@/lib/azkar-data';
 import { ChevronLeft } from 'lucide-react';
+import { SunriseIcon, MoonIcon, MoonSleepIcon, PrayerHandsIcon, SparklesIcon, OpenBookIcon, WaterDropIcon, FoodIcon } from './Icons';
+
+const iconMap: Record<string, React.ComponentType<{className?: string; size?: number}>> = {
+  SunriseIcon, MoonIcon, MoonSleepIcon, PrayerHandsIcon, SparklesIcon, OpenBookIcon, WaterDropIcon, FoodIcon,
+};
 
 export function QuickAccess() {
   const { setOpenCategory, setActiveTab } = useStore();
@@ -17,7 +22,7 @@ export function QuickAccess() {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.5, duration: 0.4 }}
+      transition={{ delay: 0.15, duration: 0.15 }}
     >
       <div className="flex items-center justify-between mb-3">
         <h2
@@ -50,7 +55,7 @@ export function QuickAccess() {
                 onClick={() => handleQuickAccess(qa.catId, qa.index)}
               >
                 <div className="flex items-start gap-2.5 mb-3">
-                  <span className="text-lg">{cat.icon}</span>
+                  {(() => { const IconComponent = iconMap[cat.icon]; return IconComponent ? <IconComponent className="w-5 h-5" /> : <span className="text-lg">{cat.icon}</span>; })()}
                   <span className="text-[10px] px-2.5 py-0.5 rounded-full glass-btn text-[#1A5C42] dark:text-[#E8D5A3] whitespace-nowrap" style={{ fontFamily: "'Noto Kufi Arabic', sans-serif" }}>
                     {cat.title}
                   </span>

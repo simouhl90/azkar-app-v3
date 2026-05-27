@@ -3,6 +3,11 @@
 import { motion } from 'framer-motion';
 import { useStore } from '@/store/useStore';
 import { azkarData } from '@/lib/azkar-data';
+import { SunriseIcon, MoonIcon, MoonSleepIcon, PrayerHandsIcon, SparklesIcon, OpenBookIcon, WaterDropIcon, FoodIcon } from './Icons';
+
+const iconMap: Record<string, React.ComponentType<{className?: string; size?: number}>> = {
+  SunriseIcon, MoonIcon, MoonSleepIcon, PrayerHandsIcon, SparklesIcon, OpenBookIcon, WaterDropIcon, FoodIcon,
+};
 
 export function CategoriesGrid() {
   const { openCategory, setOpenCategory, zikrProgress } = useStore();
@@ -85,7 +90,7 @@ export function CategoriesGrid() {
             key={cat.id}
             initial={{ opacity: 0, y: 24, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ delay: 0.15 + idx * 0.06, duration: 0.45, ease: [0.4, 0, 0.2, 1] }}
+            transition={{ delay: 0.05 + idx * 0.03, duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
             whileTap={{ scale: 0.95 }}
           >
             <div
@@ -111,7 +116,7 @@ export function CategoriesGrid() {
                   whileHover={{ scale: 1.1 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 20 }}
                 >
-                  <span className="text-3xl">{cat.icon}</span>
+                  {(() => { const IconComponent = iconMap[cat.icon]; return IconComponent ? <IconComponent className="w-8 h-8" /> : <span className="text-3xl">{cat.icon}</span>; })()}
                 </motion.div>
 
                 {/* Title */}

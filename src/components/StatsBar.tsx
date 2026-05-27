@@ -74,7 +74,7 @@ export function StatsBar() {
           key={item.label}
           initial={{ opacity: 0, y: 24, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ delay: 0.1 + idx * 0.1, duration: 0.45, ease: [0.4, 0, 0.2, 1] }}
+          transition={{ delay: 0.05 + idx * 0.05, duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
         >
           <div className={`glass-gold rounded-2xl p-4 text-center glass-shimmer ${item.borderClass} ${item.glowClass}`}>
             <motion.div
@@ -83,9 +83,9 @@ export function StatsBar() {
                 scale: [1, 1.12, 1],
               }}
               transition={{
-                duration: 3,
+                duration: 2,
                 repeat: Infinity,
-                delay: idx * 0.5,
+                delay: idx * 0.3,
                 ease: 'easeInOut',
               }}
             >
