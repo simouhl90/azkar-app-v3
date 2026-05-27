@@ -12,18 +12,78 @@ export function FloatingParticles() {
 
   if (prefersReducedMotion.current) return null;
 
-  const particles = Array.from({ length: 15 }, (_, i) => ({
+  const orbs = [
+    {
+      id: 'orb-green-1',
+      size: 420,
+      color: 'rgba(13, 59, 46, 0.08)',
+      x: ['5%', '15%', '10%', '8%'],
+      y: ['10%', '25%', '15%', '10%'],
+      duration: 22,
+    },
+    {
+      id: 'orb-gold-1',
+      size: 380,
+      color: 'rgba(197, 163, 86, 0.06)',
+      x: ['70%', '80%', '65%', '75%'],
+      y: ['5%', '20%', '30%', '10%'],
+      duration: 26,
+    },
+    {
+      id: 'orb-teal-1',
+      size: 340,
+      color: 'rgba(45, 139, 102, 0.05)',
+      x: ['30%', '45%', '25%', '35%'],
+      y: ['50%', '60%', '45%', '55%'],
+      duration: 20,
+    },
+    {
+      id: 'orb-green-2',
+      size: 300,
+      color: 'rgba(13, 59, 46, 0.04)',
+      x: ['60%', '50%', '55%', '65%'],
+      y: ['65%', '75%', '55%', '70%'],
+      duration: 24,
+    },
+  ];
+
+  const particles = Array.from({ length: 12 }, (_, i) => ({
     id: i,
     left: Math.random() * 100,
     delay: Math.random() * 10,
-    duration: 8 + Math.random() * 10,
-    size: 2 + Math.random() * 3,
-    opacity: 0.08 + Math.random() * 0.15,
-    blur: 0.5 + Math.random() * 1,
+    duration: 10 + Math.random() * 8,
+    size: 1.5 + Math.random() * 2,
+    opacity: 0.06 + Math.random() * 0.12,
+    blur: 0.5 + Math.random() * 0.5,
   }));
 
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+      {/* Immersive gradient orbs */}
+      {orbs.map((orb) => (
+        <motion.div
+          key={orb.id}
+          className="absolute rounded-full"
+          style={{
+            width: orb.size,
+            height: orb.size,
+            background: `radial-gradient(circle, ${orb.color} 0%, transparent 70%)`,
+            filter: 'blur(80px)',
+          }}
+          animate={{
+            x: orb.x,
+            y: orb.y,
+            scale: [1, 1.1, 0.95, 1.05],
+          }}
+          transition={{
+            duration: orb.duration,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+        />
+      ))}
+
+      {/* Subtle floating particles */}
       {particles.map((p) => (
         <motion.div
           key={p.id}
@@ -37,8 +97,8 @@ export function FloatingParticles() {
             filter: `blur(${p.blur}px)`,
           }}
           animate={{
-            y: [0, -120, 0],
-            x: [0, Math.sin(p.id) * 40, 0],
+            y: [0, -100, 0],
+            x: [0, Math.sin(p.id * 1.5) * 50, 0],
             opacity: [0, p.opacity, 0],
           }}
           transition={{
@@ -49,15 +109,9 @@ export function FloatingParticles() {
           }}
         />
       ))}
-      {/* Soft ambient glow orbs */}
-      <div
-        className="absolute top-[-10%] right-[-10%] w-[400px] h-[400px] rounded-full opacity-[0.04] dark:opacity-[0.03]"
-        style={{ background: 'radial-gradient(circle, #1A5C42 0%, transparent 70%)' }}
-      />
-      <div
-        className="absolute bottom-[-10%] left-[-10%] w-[350px] h-[350px] rounded-full opacity-[0.04] dark:opacity-[0.03]"
-        style={{ background: 'radial-gradient(circle, #C5A356 0%, transparent 70%)' }}
-      />
+
+      {/* Subtle grid pattern overlay */}
+      <div className="absolute inset-0 grid-pattern opacity-50" />
     </div>
   );
 }

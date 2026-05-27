@@ -43,25 +43,25 @@ export function QuickAccess() {
             <motion.div
               key={idx}
               whileTap={{ scale: 0.97 }}
-              className="snap-start shrink-0 w-[200px]"
+              className="snap-start shrink-0 w-[220px]"
             >
               <div
-                className="glass-gold cursor-pointer h-full p-4 rounded-2xl glass-shimmer"
+                className="glass-gold cursor-pointer h-full p-5 rounded-2xl glass-shimmer gradient-accent-left"
                 onClick={() => handleQuickAccess(qa.catId, qa.index)}
               >
-                <div className="flex items-start gap-2 mb-2">
+                <div className="flex items-start gap-2.5 mb-3">
                   <span className="text-lg">{cat.icon}</span>
-                  <span className="text-[10px] px-2 py-0.5 rounded-full glass-btn text-[#1A5C42] dark:text-[#E8D5A3] whitespace-nowrap" style={{ fontFamily: "'Noto Kufi Arabic', sans-serif" }}>
+                  <span className="text-[10px] px-2.5 py-0.5 rounded-full glass-btn text-[#1A5C42] dark:text-[#E8D5A3] whitespace-nowrap" style={{ fontFamily: "'Noto Kufi Arabic', sans-serif" }}>
                     {cat.title}
                   </span>
                 </div>
                 <p
-                  className="text-xs text-[#2C2C2C] dark:text-gray-300 leading-relaxed line-clamp-3"
+                  className="text-[13px] text-[#2C2C2C] dark:text-gray-300 leading-[1.8] line-clamp-3"
                   style={{ fontFamily: "'Amiri', serif" }}
                 >
                   {zikr.text.length > 80 ? zikr.text.substring(0, 80) + '...' : zikr.text}
                 </p>
-                <p className="mt-2 text-[10px] text-[#C5A356] font-medium" style={{ fontFamily: "'Noto Kufi Arabic', sans-serif" }}>
+                <p className="mt-2.5 text-[10px] text-[#C5A356] font-medium" style={{ fontFamily: "'Noto Kufi Arabic', sans-serif" }}>
                   {qa.label}
                 </p>
               </div>

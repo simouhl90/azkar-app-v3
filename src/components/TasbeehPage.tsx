@@ -82,92 +82,127 @@ export function TasbeehPage() {
       </div>
 
       {/* Current Zikr Display */}
-      <div className="glass-gold p-6 mb-4 text-center rounded-2xl glass-shimmer">
+      <div className="glass-gold p-5 mb-6 text-center rounded-2xl glass-shimmer">
         <p
-          className="text-2xl font-bold text-[#0D3B2E] dark:text-[#E8D5A3] mb-2"
+          className="text-2xl font-bold text-gradient-animate mb-1"
           style={{ fontFamily: "'Amiri', serif" }}
         >
           {tasbeehTypes.find((t) => t.value === tasbeehType)?.label || tasbeehType}
         </p>
       </div>
 
-      {/* Count Display */}
-      <motion.div
-        className="text-center mb-4"
-        key={tasbeehCount}
-        initial={{ scale: 0.8 }}
-        animate={{ scale: 1 }}
-        transition={{ type: 'spring', stiffness: 300, damping: 15 }}
-      >
-        <p
-          className="text-[72px] font-bold text-gradient-green dark:text-gradient-gold leading-none"
-          style={{ fontFamily: "'Amiri', serif" }}
-        >
-          {tasbeehCount.toLocaleString('ar-EG')}
-        </p>
-        <p className="text-sm text-[#6B6B6B] dark:text-gray-400 mt-1" style={{ fontFamily: "'Noto Kufi Arabic', sans-serif" }}>
-          من {tasbeehTarget}
-        </p>
-      </motion.div>
-
-      {/* Progress Bar */}
-      <div className="px-4 mb-6">
-        <div className="h-2 glass rounded-full overflow-hidden">
-          <motion.div
-            className="h-full bg-gradient-to-r from-[#0D3B2E] via-[#1A5C42] to-[#C5A356] rounded-full"
-            initial={{ width: 0 }}
-            animate={{ width: `${progressPct}%` }}
+      {/* Count Display with progress ring */}
+      <div className="relative flex items-center justify-center mb-6">
+        {/* SVG Progress Ring around counter */}
+        <svg className="absolute w-56 h-56 -rotate-90" viewBox="0 0 200 200">
+          <circle
+            cx="100"
+            cy="100"
+            r="90"
+            fill="none"
+            stroke="rgba(197, 163, 86, 0.1)"
+            strokeWidth="4"
+          />
+          <motion.circle
+            cx="100"
+            cy="100"
+            r="90"
+            fill="none"
+            stroke="url(#tasbeehProgressGradient)"
+            strokeWidth="4"
+            strokeLinecap="round"
+            strokeDasharray={2 * Math.PI * 90}
+            strokeDashoffset={2 * Math.PI * 90 - (progressPct / 100) * 2 * Math.PI * 90}
             transition={{ duration: 0.3 }}
           />
-        </div>
-        <p className="text-center text-xs text-[#6B6B6B] dark:text-gray-500 mt-1" style={{ fontFamily: "'Noto Kufi Arabic', sans-serif" }}>
-          {Math.round(progressPct)}%
-        </p>
+          <defs>
+            <linearGradient id="tasbeehProgressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#C5A356" />
+              <stop offset="50%" stopColor="#E8D5A3" />
+              <stop offset="100%" stopColor="#1A5C42" />
+            </linearGradient>
+          </defs>
+        </svg>
+
+        {/* Count number */}
+        <motion.div
+          className="text-center relative z-10"
+          key={tasbeehCount}
+          initial={{ scale: 0.85 }}
+          animate={{ scale: 1 }}
+          transition={{ type: 'spring', stiffness: 300, damping: 15 }}
+        >
+          <p
+            className="text-[80px] font-bold text-gradient-animate leading-none"
+            style={{ fontFamily: "'Amiri', serif" }}
+          >
+            {tasbeehCount.toLocaleString('ar-EG')}
+          </p>
+          <p className="text-sm text-[#6B6B6B] dark:text-gray-400 mt-1" style={{ fontFamily: "'Noto Kufi Arabic', sans-serif" }}>
+            من {tasbeehTarget}
+          </p>
+        </motion.div>
       </div>
 
-      {/* Big Tap Button */}
-      <div className="flex flex-col items-center gap-4">
-        <motion.button
-          whileTap={{ scale: 0.92 }}
-          transition={{ type: 'spring', stiffness: 400, damping: 15 }}
-          onClick={handleTap}
-          className="w-40 h-40 rounded-full bg-gradient-to-br from-[#0D3B2E] to-[#1A5C42] text-white counter-glow flex items-center justify-center border-2 border-[#C5A356]/30 hover:border-[#C5A356]/60 active:shadow-lg transition-all relative overflow-hidden"
-        >
-          {/* Ripple effect */}
-          <motion.div
-            className="absolute inset-0 rounded-full bg-[#C5A356]/15"
-            initial={{ scale: 0, opacity: 1 }}
-            animate={{ scale: 2, opacity: 0 }}
-            transition={{ duration: 0.5, repeat: Infinity, repeatDelay: 2 }}
-          />
-          <span className="relative text-2xl font-bold" style={{ fontFamily: "'Amiri', serif" }}>
-            اضغط
-          </span>
-        </motion.button>
+      {/* Big Tap Button - Massive Glowing Sphere */}
+      <div className="flex flex-col items-center gap-5">
+        <div className="relative">
+          {/* Animated pulsing glow ring */}
+          <span className="absolute inset-[-12px] rounded-full border-2 border-[#2D8B66]/20 animate-pulse-ring" />
+          <span className="absolute inset-[-6px] rounded-full border border-[#C5A356]/15 animate-pulse-ring" style={{ animationDelay: '0.5s' }} />
 
-        {/* Controls */}
+          <motion.button
+            whileTap={{ scale: 0.9 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 12 }}
+            onClick={handleTap}
+            className="relative w-44 h-44 rounded-full tasbeeh-sphere text-white flex items-center justify-center overflow-hidden border border-[#C5A356]/25"
+          >
+            {/* Ripple effect on tap */}
+            <AnimatePresence>
+              <motion.div
+                key={`ripple-${tasbeehCount}`}
+                className="absolute inset-0 rounded-full bg-[#C5A356]/20"
+                initial={{ scale: 0, opacity: 0.8 }}
+                animate={{ scale: 2.5, opacity: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.6, ease: 'easeOut' }}
+              />
+            </AnimatePresence>
+
+            {/* Inner highlight */}
+            <div className="absolute top-4 left-4 right-4 h-12 rounded-full bg-white/[0.06] blur-md" />
+
+            <span className="relative text-2xl font-bold" style={{ fontFamily: "'Amiri', serif" }}>
+              اضغط
+            </span>
+          </motion.button>
+        </div>
+
+        {/* Controls with glass pills */}
         <div className="flex gap-3">
-          <button
+          <motion.button
+            whileTap={{ scale: 0.95 }}
             onClick={handleReset}
-            className="flex items-center gap-2 px-5 py-2.5 rounded-xl glass-btn text-[#6B6B6B] dark:text-gray-400 hover:text-[#0D3B2E] dark:hover:text-white transition-colors"
+            className="glass-pill flex items-center gap-2 text-[#6B6B6B] dark:text-gray-400 hover:text-[#0D3B2E] dark:hover:text-white transition-colors"
           >
             <RotateCcw className="w-4 h-4" />
             <span className="text-sm" style={{ fontFamily: "'Noto Kufi Arabic', sans-serif" }}>
               إعادة تعيين
             </span>
-          </button>
+          </motion.button>
 
-          <button
+          <motion.button
+            whileTap={{ scale: 0.95 }}
             onClick={() => setShowTargetPicker(!showTargetPicker)}
-            className="flex items-center gap-2 px-5 py-2.5 rounded-xl glass-btn text-[#6B6B6B] dark:text-gray-400 hover:text-[#0D3B2E] dark:hover:text-white transition-colors"
+            className="glass-pill text-[#6B6B6B] dark:text-gray-400 hover:text-[#0D3B2E] dark:hover:text-white transition-colors"
           >
             <span className="text-sm" style={{ fontFamily: "'Noto Kufi Arabic', sans-serif" }}>
               الهدف: {tasbeehTarget}
             </span>
-          </button>
+          </motion.button>
         </div>
 
-        {/* Target Picker */}
+        {/* Target Picker with glass pills */}
         <AnimatePresence>
           {showTargetPicker && (
             <motion.div
@@ -176,21 +211,22 @@ export function TasbeehPage() {
               exit={{ opacity: 0, height: 0 }}
               className="overflow-hidden w-full"
             >
-              <div className="glass-gold p-3 rounded-2xl">
+              <div className="glass-gold p-4 rounded-2xl">
                 <div className="flex gap-2 flex-wrap justify-center">
                   {targets.map((t) => (
-                    <button
+                    <motion.button
                       key={t}
+                      whileTap={{ scale: 0.93 }}
                       onClick={() => handleTargetChange(t)}
-                      className={`px-4 py-2 rounded-xl text-sm transition-all ${
+                      className={`px-5 py-2 rounded-full text-sm transition-all ${
                         tasbeehTarget === t
-                          ? 'bg-gradient-to-r from-[#0D3B2E] to-[#1A5C42] text-white shadow-md border border-[#C5A356]/30'
-                          : 'glass-btn text-[#2C2C2C] dark:text-gray-300'
+                          ? 'bg-gradient-to-r from-[#0D3B2E] to-[#1A5C42] text-white shadow-lg border border-[#C5A356]/30'
+                          : 'glass-pill text-[#2C2C2C] dark:text-gray-300'
                       }`}
                       style={{ fontFamily: "'Noto Kufi Arabic', sans-serif" }}
                     >
                       {t.toLocaleString('ar-EG')}
-                    </button>
+                    </motion.button>
                   ))}
                 </div>
               </div>
@@ -212,21 +248,23 @@ export function TasbeehPage() {
             <motion.div
               initial={{ y: 50 }}
               animate={{ y: 0 }}
-              className="glass-gold rounded-3xl p-8 text-center shadow-2xl mx-8 max-w-sm"
+              className="neo-glass rounded-3xl p-8 text-center shadow-2xl mx-8 max-w-sm"
             >
-              <div className="text-6xl mb-4">🎊</div>
-              <p
-                className="text-2xl font-bold text-[#1A5C42] dark:text-[#E8D5A3] mb-2"
-                style={{ fontFamily: "'Amiri', serif" }}
-              >
-                ما شاء الله!
-              </p>
-              <p className="text-sm text-[#6B6B6B] dark:text-gray-400" style={{ fontFamily: "'Noto Kufi Arabic', sans-serif" }}>
-                أتممت {tasbeehTarget} تسبيحة بحمد الله
-              </p>
-              <p className="text-xs text-[#C5A356] mt-2" style={{ fontFamily: "'Noto Kufi Arabic', sans-serif" }}>
-                اضغط للإغلاق
-              </p>
+              <div className="p-1 rounded-[calc(1.5rem-2px)] bg-gradient-to-br from-[#0D3B2E] to-[#1A5C42]">
+                <div className="text-6xl mb-4">🎊</div>
+                <p
+                  className="text-2xl font-bold text-gradient-gold mb-2"
+                  style={{ fontFamily: "'Amiri', serif" }}
+                >
+                  ما شاء الله!
+                </p>
+                <p className="text-sm text-[#E8D5A3]/80" style={{ fontFamily: "'Noto Kufi Arabic', sans-serif" }}>
+                  أتممت {tasbeehTarget} تسبيحة بحمد الله
+                </p>
+                <p className="text-xs text-[#C5A356]/60 mt-3" style={{ fontFamily: "'Noto Kufi Arabic', sans-serif" }}>
+                  اضغط للإغلاق
+                </p>
+              </div>
             </motion.div>
           </motion.div>
         )}

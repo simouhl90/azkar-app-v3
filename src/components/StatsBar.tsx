@@ -42,22 +42,28 @@ export function StatsBar() {
       label: 'أذكار اليوم',
       value: stats.today,
       icon: BookOpen,
-      color: 'text-[#1A5C42] dark:text-[#E8D5A3]',
-      bg: 'bg-[#1A5C42]/10 dark:bg-[#1A5C42]/20',
+      color: 'text-[#1A5C42] dark:text-[#34D399]',
+      bg: 'bg-[#1A5C42]/10 dark:bg-[#34D399]/10',
+      borderClass: 'gradient-border-top-green',
+      glowClass: 'glow-emerald',
     },
     {
       label: 'أيام متتالية',
       value: stats.streak,
       icon: Flame,
       color: 'text-orange-500 dark:text-orange-400',
-      bg: 'bg-orange-500/10 dark:bg-orange-500/15',
+      bg: 'bg-orange-500/10 dark:bg-orange-500/10',
+      borderClass: 'gradient-border-top-amber',
+      glowClass: 'glow-amber',
     },
     {
       label: 'إجمالي الأذكار',
       value: stats.allTime,
       icon: Star,
-      color: 'text-[#C5A356]',
-      bg: 'bg-[#C5A356]/10 dark:bg-[#C5A356]/15',
+      color: 'text-[#C5A356] dark:text-[#E8D5A3]',
+      bg: 'bg-[#C5A356]/10 dark:bg-[#C5A356]/10',
+      borderClass: 'gradient-border-top-gold',
+      glowClass: 'glow-gold',
     },
   ];
 
@@ -66,16 +72,27 @@ export function StatsBar() {
       {statItems.map((item, idx) => (
         <motion.div
           key={item.label}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 + idx * 0.1, duration: 0.4 }}
+          initial={{ opacity: 0, y: 24, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ delay: 0.1 + idx * 0.1, duration: 0.45, ease: [0.4, 0, 0.2, 1] }}
         >
-          <div className="glass-gold rounded-2xl p-3 text-center glass-shimmer">
-            <div className={`mx-auto mb-2 w-10 h-10 rounded-xl ${item.bg} flex items-center justify-center backdrop-blur-sm`}>
+          <div className={`glass-gold rounded-2xl p-4 text-center glass-shimmer ${item.borderClass} ${item.glowClass}`}>
+            <motion.div
+              className={`mx-auto mb-2 w-11 h-11 rounded-xl ${item.bg} flex items-center justify-center backdrop-blur-sm`}
+              animate={{
+                scale: [1, 1.12, 1],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                delay: idx * 0.5,
+                ease: 'easeInOut',
+              }}
+            >
               <item.icon className={`w-5 h-5 ${item.color}`} />
-            </div>
+            </motion.div>
             <p
-              className="text-xl font-bold text-[#0D3B2E] dark:text-[#E8D5A3]"
+              className="text-2xl font-bold text-gradient-animate"
               style={{ fontFamily: "'Amiri', serif" }}
             >
               <AnimatedCounter target={item.value} />
